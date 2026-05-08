@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Psycho-Logistics Manifesto | Randy Fisher</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg:        #0d0d0d;
+      --surface:   #141414;
+      --surface2:  #1c1c1c;
+      --border:    #2a2a2a;
+      --accent:    #c8a96e;
+      --accent2:   #e8c88a;
+      --text:      #f0ece4;
+      --muted:     #888880;
+      --light:     #d4cfc5;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-size: 17px;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ─── NAV ──────────────────────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(13,13,13,0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2rem;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.4rem;
+      letter-spacing: 0.1em;
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.82rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--accent); }
+
+    /* ─── HERO ──────────────────────────────────────────────── */
+    .hero {
+      padding: 140px 2rem 80px;
+      max-width: 860px;
+      margin: 0 auto;
+      text-align: left;
+    }
+
+    .hero-eyebrow {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      border: 1px solid var(--accent);
+      padding: 4px 14px;
+      margin-bottom: 2rem;
+    }
+
+    .hero h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(3.5rem, 9vw, 7rem);
+      line-height: 0.95;
+      letter-spacing: 0.02em;
+      color: var(--text);
+      margin-bottom: 1.5rem;
+    }
+
+    .hero h1 em {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      color: var(--accent);
+      font-size: 0.85em;
+    }
+
+    .hero-sub {
+      font-size: 1.2rem;
+      color: var(--light);
+      max-width: 600px;
+      font-weight: 300;
+      line-height: 1.6;
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-rule {
+      width: 80px;
+      height: 2px;
+      background: var(--accent);
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-byline {
+      font-size: 0.8rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* ─── DIVIDER ───────────────────────────────────────────── */
+    .section-divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 0;
+    }
+
+    /* ─── MANIFESTO BODY ────────────────────────────────────── */
+    .manifesto {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    /* ─── INTRO BLOCK ───────────────────────────────────────── */
+    .intro-block {
+      padding: 80px 0 60px;
+    }
+
+    .intro-block p {
+      font-size: 1.15rem;
+      color: var(--light);
+      max-width: 680px;
+      margin-bottom: 1.5rem;
+    }
+
+    .intro-block p strong {
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    /* ─── THESIS CALLOUT ────────────────────────────────────── */
+    .thesis {
+      background: var(--surface2);
+      border-left: 4px solid var(--accent);
+      padding: 2rem 2.5rem;
+      margin: 40px 0 60px;
+    }
+
+    .thesis p {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      font-style: italic;
+      color: var(--accent2);
+      line-height: 1.5;
+    }
+
+    /* ─── SECTION ───────────────────────────────────────────── */
+    .ms-section {
+      padding: 60px 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .ms-section:first-of-type { border-top: none; }
+
+    .section-label {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.2rem;
+    }
+
+    .ms-section h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      letter-spacing: 0.03em;
+      color: var(--text);
+      line-height: 1.05;
+      margin-bottom: 1.5rem;
+    }
+
+    .ms-section p {
+      color: var(--light);
+      margin-bottom: 1.2rem;
+      max-width: 680px;
+    }
+
+    .ms-section p strong {
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    /* ─── PULLQUOTE ─────────────────────────────────────────── */
+    .pullquote {
+      margin: 2.5rem 0;
+      padding: 0 0 0 2rem;
+      border-left: 2px solid var(--accent);
+    }
+
+    .pullquote p {
+      font-size: 1.25rem;
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      color: var(--accent2);
+      margin-bottom: 0;
+    }
+
+    /* ─── EVIDENCE GRID ─────────────────────────────────────── */
+    .evidence-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5rem;
+      margin: 2.5rem 0;
+    }
+
+    .evidence-card {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      padding: 1.5rem;
+    }
+
+    .evidence-card .stat {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 3rem;
+      color: var(--accent);
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+
+    .evidence-card .stat-label {
+      font-size: 0.85rem;
+      color: var(--light);
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+    }
+
+    .evidence-card .stat-desc {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-bottom: 0;
+    }
+
+    /* ─── PROOF POINTS ──────────────────────────────────────── */
+    .proof-list {
+      list-style: none;
+      margin: 2rem 0;
+    }
+
+    .proof-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      padding: 1.2rem 0;
+      border-bottom: 1px solid var(--border);
+      color: var(--light);
+      font-size: 0.95rem;
+    }
+
+    .proof-list li::before {
+      content: '→';
+      color: var(--accent);
+      font-size: 1rem;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    /* ─── PRINCIPLES ────────────────────────────────────────── */
+    .principles {
+      margin: 2rem 0;
+    }
+
+    .principle {
+      padding: 2rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .principle:last-child { border-bottom: none; }
+
+    .principle-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 0.9rem;
+      letter-spacing: 0.15em;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+
+    .principle h3 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.6rem;
+      letter-spacing: 0.04em;
+      color: var(--text);
+      margin-bottom: 0.8rem;
+    }
+
+    .principle p {
+      color: var(--light);
+      font-size: 0.95rem;
+      max-width: 640px;
+      margin-bottom: 0;
+    }
+
+    /* ─── CLOSER ────────────────────────────────────────────── */
+    .closer {
+      padding: 80px 0 40px;
+      border-top: 1px solid var(--border);
+    }
+
+    .closer h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2.2rem, 5vw, 3.5rem);
+      letter-spacing: 0.03em;
+      color: var(--text);
+      margin-bottom: 1.5rem;
+      max-width: 640px;
+    }
+
+    .closer p {
+      color: var(--light);
+      max-width: 600px;
+      margin-bottom: 1.2rem;
+    }
+
+    /* ─── CTA ───────────────────────────────────────────────── */
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-top: 2.5rem;
+      padding-bottom: 80px;
+    }
+
+    .btn-primary {
+      display: inline-block;
+      padding: 14px 32px;
+      background: var(--accent);
+      color: #0d0d0d;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.15s;
+    }
+
+    .btn-primary:hover {
+      background: var(--accent2);
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      display: inline-block;
+      padding: 14px 32px;
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+
+    .btn-secondary:hover {
+      background: var(--accent);
+      color: #0d0d0d;
+    }
+
+    /* ─── FOOTER ────────────────────────────────────────────── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2rem;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.78rem;
+      letter-spacing: 0.05em;
+    }
+
+    footer a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    /* ─── RESPONSIVE ────────────────────────────────────────── */
+    @media (max-width: 600px) {
+      .nav-links { display: none; }
+      .hero { padding-top: 100px; }
+      .evidence-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a class="nav-logo" href="https://randylfisher.com">Randy Fisher</a>
+    <ul class="nav-links">
+      <li><a href="https://randylfisher.com/#problem">The Problem</a></li>
+      <li><a href="https://randylfisher.com/#keynotes">Keynotes</a></li>
+      <li><a href="https://randylfisher.com/#about">About</a></li>
+      <li><a href="https://calendly.com/randylfisher/driver-retention-strategy-call-15-minutes">Schedule a Call</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-eyebrow">A Framework for Fleet Leaders</div>
+    <h1>The Psycho-<em>Logistics</em><br>Manifesto</h1>
+    <div class="hero-rule"></div>
+    <p class="hero-sub">You don't manage drivers. You manage perception. The sooner your operation understands that, the sooner your turnover numbers move.</p>
+    <p class="hero-byline">By Randy Fisher &nbsp;·&nbsp; Randy Fisher Training</p>
+  </section>
+
+  <hr class="section-divider" />
+
+  <!-- MANIFESTO BODY -->
+  <main class="manifesto">
+
+    <!-- INTRO -->
+    <div class="intro-block">
+      <p>Trucking is a hard business managed by hard people. It has to be. <strong>Seven-dollar diesel, increased regulation, and ever-changing customer expectations</strong> drive the soft and the weak to less demanding industries. We are judged by lines on a spreadsheet. We measure virtually everything — fuel metrics, topline revenue, on-time percentage, cost per mile.</p>
+      <p>Ask any fleet leader what their most important asset is and they will not mention the trucks or the trailers. They will point to the person behind the wheel. Even the most hardboiled among us knows that <strong>without a driver, the entire industry grinds to a halt.</strong></p>
+      <p>We know what it costs to hire, train, and replace a driver. We have no idea what it costs to keep one.</p>
+      <p>And that frustrates the hell out of us — so we rationalize. We tell ourselves it must be money. When we lose a driver, it must have been because we did not pay enough. It does not matter whether or not this is true. It makes sense, so it is the story we believe.</p>
+
+      <div class="thesis">
+        <p>"I've spent years noticing the same things working for reasons nobody could explain on a spreadsheet. I call it Psycho-Logistics. It is built on a single premise: perception is reality."</p>
+      </div>
+
+      <p>It is not the job but <strong>the way a driver sees it</strong> that determines their satisfaction. We do not manage drivers — but we can manage their expectations, their perception, and when we do that well, we manage their behavior.</p>
+      <p>What follows are not theories. These are things I have done, results I have measured, and proof that when you start looking for the magic, you find it everywhere.</p>
+    </div>
+
+    <!-- SECTION 1: THE REAL COST -->
+    <section class="ms-section">
+      <div class="section-label">The Foundation</div>
+      <h2>Why the Industry Gets This Wrong</h2>
+      <p>The first fleet I was hired to run was every driver's dream. Predictable freight. Predictable loads. Paid at the top of the market. Everything about it was great.</p>
+      <p>Then we lost the account. I was able to start a new account with the same company — but any driver who came with me would take a <strong>seven-cent-per-mile pay cut.</strong> Drivers lined up to follow me anyway. I had my pick and took the best ten. A year later, all ten were still with me, even though recruiters hounded them daily.</p>
+      <div class="pullquote"><p>It was not about the money. It was about the respect.</p></div>
+      <p>Rory Sutherland, behavioral economist and Vice-Chairman of Ogilvy UK, argues that the best solutions are not always logical — they are psychological. Because we have decided that money alone drives retention, we stopped looking for other solutions. Because we cannot quantify it on a spreadsheet, we dismiss the idea that small psychological reframes can make a massive operational difference.</p>
+      <p>The placebo effect in trucking is as real as it is in medicine. We just need the courage to look for it and the conviction to use it.</p>
+    </section>
+
+    <!-- STATS GRID -->
+    <div class="evidence-grid">
+      <div class="evidence-card">
+        <div class="stat">75%</div>
+        <div class="stat-label">Starting Turnover Rate</div>
+        <div class="stat-desc">The account I inherited. Top pay, home weekly, new equipment — and a revolving door.</div>
+      </div>
+      <div class="evidence-card">
+        <div class="stat">&lt;40%</div>
+        <div class="stat-label">Turnover After Training</div>
+        <div class="stat-desc">Achieved without raising pay. The variable that moved was communication discipline.</div>
+      </div>
+      <div class="evidence-card">
+        <div class="stat">$0</div>
+        <div class="stat-label">Cost of Context</div>
+        <div class="stat-desc">Telling drivers their queue position stopped complaints cold. Context is free. It always has been.</div>
+      </div>
+    </div>
+
+    <!-- SECTION 2: PRINCIPLES -->
+    <section class="ms-section">
+      <div class="section-label">The Framework</div>
+      <h2>The Principles of Psycho-Logistics</h2>
+      <p>These are not management theories. Each of these is something I have deployed on an active fleet and measured. None of them required a budget approval.</p>
+
+      <div class="principles">
+
+        <div class="principle">
+          <div class="principle-num">Principle 01</div>
+          <h3>Perception Is the Product</h3>
+          <p>It is not the job but the way a driver sees it that determines their satisfaction. A driver who feels like an interruption, feels underpaid, or feels ignored — operationally, they are those things. Regardless of objective conditions. Your first job every day is to manage perception, not just freight.</p>
+        </div>
+
+        <div class="principle">
+          <div class="principle-num">Principle 02</div>
+          <h3>Context Is Free. Use It.</h3>
+          <p>On a startup account, I had more drivers than freight. Drivers were ready to quit — not because they were sitting, but because they did not know when it would end. I told each driver their position in the load queue. Complaints stopped that day. They were not frustrated about the wait. They were frustrated about the unknown. Context costs nothing and changes everything.</p>
+        </div>
+
+        <div class="principle">
+          <div class="principle-num">Principle 03</div>
+          <h3>Set the Experience Before It Begins</h3>
+          <p>My standard practice is to tell a driver a load will be terrible before they take it. If it is not, they are relieved. If it is, they are prepared. Either way, we managed the experience before it started. Expectation management is not spin — it is operational discipline.</p>
+        </div>
+
+        <div class="principle">
+          <div class="principle-num">Principle 04</div>
+          <h3>Recognition Outperforms Money</h3>
+          <p>On a closing account where service was suffering, we tried a $200 weekly bonus for perfect on-time delivery. Service improved mildly. The following week we had no budget for the bonus, so instead we sent a fleet message recognizing every driver who hit every stop. Service improved dramatically. They cared more about being on the list than they cared about the cash.</p>
+        </div>
+
+        <div class="principle">
+          <div class="principle-num">Principle 05</div>
+          <h3>Identity Drives Behavior</h3>
+          <p>The Mayor story. Lance had more attitude than aptitude toward his delivery window — until I started calling him "The Mayor of the Van Yard." When his identity shifted from driver to community leader, his behavior followed. He was never late again. You cannot correct your way to behavior change. You engineer it through identity.</p>
+        </div>
+
+        <div class="principle">
+          <div class="principle-num">Principle 06</div>
+          <h3>Dignity at Scale Has a Price Tag</h3>
+          <p>There are companies that do not reimburse driver showers. For ten or fifteen dollars, you can help a driver feel like a human being on the road. That is not a perk. That is dignity at scale for the price of a fast food lunch. Every interaction, every policy, every small decision either deposits to or withdraws from a driver's sense of worth. The balance sheet matters.</p>
+        </div>
+
+        <div class="principle">
+          <div class="principle-num">Principle 07</div>
+          <h3>Your Tone Is a Decision</h3>
+          <p>Every answered call is either retention or erosion. There is no neutral option. When the phone rings for your dispatcher, it is an interruption. When it rings for a driver, it is his livelihood colliding with someone's Tuesday night. Emotional regulation is not personality. It is a trainable skill — and almost no fleet in America has trained for it.</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION 3: FIELD EVIDENCE -->
+    <section class="ms-section">
+      <div class="section-label">Proof Points</div>
+      <h2>What This Looks Like in the Field</h2>
+      <p>Every one of the following examples comes from inside a live operation. None of them cost more than time and intention.</p>
+
+      <ul class="proof-list">
+        <li>Every branded shirt given to a new driver should be high-visibility. Drivers will not wear a black t-shirt out to dinner, but a high-vis shirt follows them into every customer facility, every truck stop, every moment you would want your brand visible. Zero additional cost. Ignored every time I have proposed it to a VP. Endorsed by every driver I have mentioned it to.</li>
+        <li>Calling a driver into the office without context guarantees the first five minutes of any conversation are spent answering the question they are asking in their head: "Am I in trouble?" Two extra sentences on the front end of the call recovers that time and opens the driver to what you actually need to say.</li>
+        <li>Aaron was our highest safety risk. When we installed an identity-based camera system — one that tracked what he was doing right, not just what he was doing wrong — he became one of the top five safest drivers in the entire company. We did not change his truck. We changed what he believed about himself as a driver.</li>
+        <li>Dave Chapman walked his yard every morning in a safety vest without saying a word to a driver who was not wearing theirs. He just looked at his own vest, then back at them. The compliance problem that had resisted months of fleet messages and direct confrontation was gone in two weeks. Modeling the behavior you expect is not a soft idea. It is the most efficient change management tool in this industry.</li>
+        <li>When Lance, the driver I referred to as "the Mayor," learned that Allan had lost his mother overnight and would not make their relay, he went from ready to quit to "bring me tomorrow's load, I've got this" the moment the context landed. One sentence of real information converted resentment into loyalty in thirty seconds.</li>
+      </ul>
+    </section>
+
+    <!-- CLOSER -->
+    <div class="closer">
+      <h2>Dignity Isn't Soft. It's the Most Underleveraged Operational Variable in Your Fleet.</h2>
+      <p>Over the next decade, roughly twenty-five percent of American truck drivers will retire. That is not a projection. That is math. Millions of safe miles will walk out the door and every CDL holder left becomes more valuable by the day.</p>
+      <p>In that market, every carrier will offer competitive pay, new equipment, and weekly home time. Those things become the price of admission — not the differentiator. <strong>The differentiator will be dignity.</strong></p>
+      <p>Not a mission statement. Not a driver appreciation lunch once a quarter. Dignity is what happens at two in the morning when something goes wrong and a driver picks up the phone. It is whether the person on the other end treats him like a problem to be managed or a professional doing a hard job in hard conditions.</p>
+      <p>The carriers who understand that Psycho-Logistics is a retention strategy — not a soft idea, not an HR initiative, but the actual competitive variable that moves the needle when everything else is equal — those carriers will own the next decade.</p>
+      <p>Trucks don't quit. People do.</p>
+      <p>If you change — everything changes.</p>
+
+      <div class="cta-row">
+        <a class="btn-primary" href="https://calendly.com/randylfisher/driver-retention-strategy-call-15-minutes">Schedule a Conversation</a>
+        <a class="btn-secondary" href="https://randylfisher.com/#keynotes">View Keynotes</a>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>Randy Fisher Training &nbsp;·&nbsp; <a href="mailto:randy@randylfisher.com">randy@randylfisher.com</a> &nbsp;·&nbsp; <a href="https://linkedin.com/in/randylfisher">LinkedIn</a> &nbsp;·&nbsp; Based in Wapakoneta, Ohio</p>
+  </footer>
+
+</body>
+</html>
