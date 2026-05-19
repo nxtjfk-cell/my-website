@@ -114,10 +114,13 @@
             '</select>',
           '</div>',
           '<div class="rf-fg"><label class="rf-lbl" for="rf-email">Email Address</label><input class="rf-inp" type="email" id="rf-email" placeholder="you@yourcompany.com" autocomplete="email" /></div>',
-          '<button id="rf-submit">Send Me the White Paper &rarr;</button>',
-          '<p id="rf-privacy">Your info is never sold or shared. Unsubscribe anytime.</p>',
-          '<button id="rf-skip">No thanks, take me to the site</button>',
-        '</div>',
+          '<div id="rf-success">',
+  '<div id="rf-success-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg></div>',
+  '<p id="rf-success-title">Success!</p>',
+  '<p id="rf-success-body">Your details have been securely captured.</p>',
+  '<a href="https://nxtjfk-cell.github.io/my-website/Psycho_Logistics_White_Paper.pdf" download id="rf-download-btn">Download White Paper Now &darr;</a>',
+  '<p id="rf-success-body" style="margin-top:15px; font-size:0.75rem;">This window will close in <span id="rf-countdown">10</span> seconds&hellip;</p>',
+'</div>'
 
         '<div id="rf-success">',
           '<div id="rf-success-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg></div>',
