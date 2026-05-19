@@ -169,39 +169,61 @@
       return;
     }
 
-    // ── SWAP TO SUCCESS STATE ──────────────────────────────
-    document.getElementById('rf-form-panel').style.display = 'none';
-    document.getElementById('rf-success').style.display = 'block';
+    // ── DISABLE BUTTON DURING SUBMISSION ──────────────────
+    var btn = document.getElementById('rf-submit');
+    btn.disabled = true;
+    btn.textContent = 'Sending\u2026';
 
-    setCookie(COOKIE_NAME, 3650);
+    // ── POST TO FORMSPREE ──────────────────────────────────
+    fetch('https://formspree.io/f/mzdwzlje', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({ name: name, state: state, email: email })
+    })
+    .then(function (res) { return res.json().then(function (data) { return { ok: res.ok, data: data }; }); })
+    .then(function (result) {
+      if (result.ok) {
+        // ── SUCCESS ─────────────────────────────────────
+        setCookie(COOKIE_NAME, 3650);
+        document.getElementById('rf-form-panel').style.display = 'none';
+        document.getElementById('rf-success').style.display = 'block';
 
-    // ── TODO: wire up your form backend here ───────────────
-    // Option A — Formspree (free, easiest):
-    //   1. Create account at formspree.io
-    //   2. Replace YOUR_FORM_ID below with your endpoint ID
-    //
-    // fetch('https://formspree.io/f/YOUR_FORM_ID', {
-    //   method: 'POST',
-    //   headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-    //   body: JSON.stringify({ name: name, state: state, email: email })
-    // });
-    //
-    // Option B — Mailchimp embedded form endpoint
-    // Option C — Any other POST endpoint you prefer
-    // ──────────────────────────────────────────────────────
+        // Countdown and auto-close
+        var count = 5;
+        var countdown = document.getElementById('rf-countdown');
+        var timer = setInterval(function () {
+          count--;
+          if (countdown) countdown.textContent = count;
+          if (count <= 0) {
+            clearInterval(timer);
+            closePopup();
+          }
+        }, 1000);
 
-    // Countdown and auto-close
-    var count = 5;
-    var countdown = document.getElementById('rf-countdown');
-    var timer = setInterval(function () {
-      count--;
-      if (countdown) countdown.textContent = count;
-      if (count <= 0) {
-        clearInterval(timer);
-        closePopup();
+      } else {
+        // ── FORMSPREE RETURNED AN ERROR ──────────────────
+        var msg = (result.data && result.data.error) ? result.data.error : 'Something went wrong. Please try again.';
+        showError(msg);
+        btn.disabled = false;
+        btn.textContent = 'Send Me the White Paper \u2192';
       }
-    }, 1000);
+    })
+    .catch(function () {
+      showError('Network error. Check your connection and try again.');
+      btn.disabled = false;
+      btn.textContent = 'Send Me the White Paper \u2192';
+    });
   });
+
+  function showError(msg) {
+    var existing = document.getElementById('rf-error-msg');
+    if (existing) existing.parentNode.removeChild(existing);
+    var err = document.createElement('p');
+    err.id = 'rf-error-msg';
+    err.style.cssText = 'font-family:"Source Sans 3",sans-serif;font-size:0.78rem;color:#e07060;margin-top:8px;text-align:center;';
+    err.textContent = msg;
+    document.getElementById('rf-submit').insertAdjacentElement('afterend', err);
+  }
 
   // Prevent body scroll while popup is open
   var originalOverflow = document.body.style.overflow;
